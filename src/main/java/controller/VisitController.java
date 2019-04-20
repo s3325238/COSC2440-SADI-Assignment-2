@@ -39,4 +39,18 @@ public class VisitController {
         return visit;
 
     }
+
+    // Find Visit by id
+    @RequestMapping(path = "/visits/findVisitById/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+    public @ResponseBody Visit findVisitById (@PathVariable("id") int id){
+        return visitService.findVisitById(id);
+    }
+
+    // Find visit by patient id
+    @RequestMapping(path = "/visits/findVisitByPatientId/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
+    public List<Visit> findVisitByPatientId(@PathVariable("id") int id){
+
+        return visitService.findVisitByPatientId(id);
+
+    }
 }

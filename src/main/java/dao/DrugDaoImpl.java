@@ -37,7 +37,6 @@ public class DrugDaoImpl implements DrugDao {
         //Use criteria to query with session to fetch all contacts
         return getSession().createQuery(criteria).getResultList();
 
-//        return drugs;
     }
 
     @Override
@@ -47,6 +46,7 @@ public class DrugDaoImpl implements DrugDao {
 
     @Override
     public void deleteDrug(int id) {
+
         Drug drug = getSession().get(Drug.class, id);
 
         getSession().delete(drug);
@@ -54,11 +54,14 @@ public class DrugDaoImpl implements DrugDao {
 
     @Override
     public Drug findDrugById(int id) {
+
         return getSession().get(Drug.class, id);
+
     }
 
     @Override
     public List<Drug> findDrugByName(String drug_name) {
+
         Query query = getSession().createQuery("from Drug d where d.drug_name like :drug_name");
 
         query.setParameter("drug_name", "%" + drug_name + "%");

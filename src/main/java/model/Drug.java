@@ -1,5 +1,6 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -16,6 +17,9 @@ public class Drug {
     private String drug_name;
 
     // One to many - visit
+//    @ManyToOne
+//    @JsonIgnore
+//    private Visit visit;
 
     // Null constructor
     public Drug() {

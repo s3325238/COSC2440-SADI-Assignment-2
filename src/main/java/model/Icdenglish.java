@@ -36,8 +36,8 @@ public class Icdenglish {
     @Column(name = "disease_name")
     private String disease_name;
 
-    @ManyToOne
-    private Visit visit;
+//    @ManyToOne
+//    private Visit visit;
 
     // Null constructor
     public Icdenglish() {

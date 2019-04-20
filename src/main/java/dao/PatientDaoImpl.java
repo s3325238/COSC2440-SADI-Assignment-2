@@ -35,11 +35,7 @@ public class PatientDaoImpl implements PatientDao {
         criteria.orderBy(builder.asc(patientRoot.get("id")));
 
         //Use criteria to query with session to fetch all contacts
-        List<Patient> patients = getSession().createQuery(criteria).getResultList();
-
-        return patients;
-
-//        return getSession().createQuery("from Patient").list();
+        return getSession().createQuery(criteria).getResultList();
     }
 
     @Override
@@ -67,7 +63,7 @@ public class PatientDaoImpl implements PatientDao {
 
     @Override
     public List<Patient> findPatientByName(String patient_name) {
-        Query query = getSession().createQuery("from Patient p where p.name like :patient_name");
+        Query query = getSession().createQuery("from Patient p where p.patient_name like :patient_name");
 
         query.setParameter("patient_name", "%" + patient_name + "%");
 

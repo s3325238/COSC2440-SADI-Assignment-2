@@ -1,8 +1,10 @@
 package dao;
 
+import model.Patient;
 import model.Visit;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -34,7 +36,6 @@ public class VisitDaoImpl implements VisitDao {
         //Use criteria to query with session to fetch all contacts
         return getSession().createQuery(criteria).getResultList();
 
-//        return visits;
     }
 
     @Override
@@ -42,18 +43,19 @@ public class VisitDaoImpl implements VisitDao {
         getSession().saveOrUpdate(visit);
     }
 
-//    @Override
-//    public void deleteVisit(int it) {
-//
-//    }
-
     @Override
     public Visit findVisitById(int id) {
-        return null;
+        return getSession().get(Visit.class, id);
     }
 
     @Override
     public List<Visit> findVisitByPatientId(int id) {
-        return null;
+
+        Query query = getSession().createQuery("from Visit as v where v.patient.id = :id");
+
+        // Set parameter with name in the query, and id from param
+        query.setParameter("id", id);
+
+        return query.list();
     }
 }

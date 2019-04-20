@@ -21,6 +21,10 @@ public class Visit {
     @JsonIgnore
     private Patient patient;
 
+    // One visit can have many drug
+//    @OneToMany(mappedBy = "visit", cascade = CascadeType.ALL, fetch = FetchType.EAGER) //bydefault it is not loaded
+//    private Drug drug;
+
      // icdenglish
 //    @OneToMany
 //    private Icdenglish icdenglish;

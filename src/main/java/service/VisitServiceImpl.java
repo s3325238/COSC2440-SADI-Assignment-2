@@ -21,13 +21,6 @@ public class VisitServiceImpl implements VisitService {
     VisitDao visitDao;
 
     @Autowired
-    private SessionFactory sessionFactory;
-
-    protected Session getSession() {
-        return sessionFactory.getCurrentSession();
-    }
-
-    @Autowired
     public void setVisitDao(VisitDao visitDao) {
         this.visitDao = visitDao;
     }
@@ -49,6 +42,6 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public List<Visit> findVisitByPatientId(int id) {
-        return null;
+        return visitDao.findVisitByPatientId(id);
     }
 }

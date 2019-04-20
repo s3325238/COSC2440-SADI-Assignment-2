@@ -16,17 +16,6 @@ public class PatientController {
     @Autowired
     PatientService patientService;
 
-//    @Autowired
-//    SessionFactory sessionFactory;
-//
-//    public void setSessionFactory(SessionFactory sessionFactory) {
-//        this.sessionFactory = sessionFactory;
-//    }
-//
-//    protected Session getSession() {
-//        return sessionFactory.getCurrentSession();
-//    }
-
     // Read all
     @RequestMapping(path = "/patients", method = RequestMethod.GET, headers = "Accept=application/json")
     public List<Patient> getAllPatients() {
@@ -46,12 +35,6 @@ public class PatientController {
     // Update
     @RequestMapping(path = "/patients/update/{id}", method = RequestMethod.PUT)
     public @ResponseBody Patient updatePatient(@PathVariable("id") int id, @RequestBody Patient patient) {
-
-//        patient.setId(id);
-//
-//        patientService.saveOrUpdatePatient(patient);
-//
-//        return patient.getId();
 
         patient.setId(id);
 

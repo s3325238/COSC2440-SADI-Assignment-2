@@ -29,6 +29,8 @@ public class Patient {
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.EAGER) //bydefault it is not loaded
     private List<Visit> visitList;
 
+    // One patient takes many drugs in one visit
+
     // Null Constructor
     public Patient() {
     }
