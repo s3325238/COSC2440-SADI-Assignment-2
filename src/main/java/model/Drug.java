@@ -15,6 +15,8 @@ public class Drug {
     @Column
     private String drug_name;
 
+    // One to many - visit
+
     // Null constructor
     public Drug() {
     }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -37,11 +38,18 @@ public class PatientDaoImpl implements PatientDao {
         List<Patient> patients = getSession().createQuery(criteria).getResultList();
 
         return patients;
+
+//        return getSession().createQuery("from Patient").list();
     }
 
     @Override
     public void saveOrUpdatePatient(Patient patient) {
         getSession().saveOrUpdate(patient);
+    }
+
+    @Override
+    public void updatePatient(Patient patient){
+        getSession().update(patient);
     }
 
     @Override

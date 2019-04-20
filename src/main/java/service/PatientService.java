@@ -8,7 +8,9 @@ public interface PatientService {
 
     public List<Patient> getAllPatients();
 
-    public void saveOrUpdatePatient(Patient patient);
+    public int saveOrUpdatePatient(Patient patient);
+
+    public String updatePatient(Patient patient); // New implement function
 
     public void deletePatient(int id);
 

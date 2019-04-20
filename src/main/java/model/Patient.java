@@ -2,6 +2,7 @@ package model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.*;
 
 @Entity
 @Table(name = "patient")
@@ -25,11 +26,24 @@ public class Patient {
     @Column
     private String address;
 
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.EAGER) //bydefault it is not loaded
+    private List<Visit> visitList;
+
     // Null Constructor
     public Patient() {
     }
 
     // Getter & Setter
+
+
+    public List<Visit> getVisitList() {
+        return visitList;
+    }
+
+    public void setVisitList(List<Visit> visitList) {
+        this.visitList = visitList;
+    }
+
     public int getId() {
         return id;
     }

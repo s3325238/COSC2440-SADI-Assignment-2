@@ -10,6 +10,8 @@ public interface PatientDao {
 
     public void saveOrUpdatePatient(Patient patient);
 
+    public void updatePatient(Patient patient); // New implement function
+
     public void deletePatient(int id);
 
     public Patient findPatientById(int id);

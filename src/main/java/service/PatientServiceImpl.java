@@ -2,6 +2,7 @@ package service;
 
 import dao.PatientDao;
 import model.Patient;
+import model.Visit;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -36,8 +38,49 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public void saveOrUpdatePatient(Patient patient) {
+    public int saveOrUpdatePatient(Patient patient) {
+
+        if (patient.getVisitList() != null){
+            for (Visit visit : patient.getVisitList()) {
+                visit.setPatient(patient);
+            }
+        }
+
         patientDao.saveOrUpdatePatient(patient);
+
+        return patient.getId();
+    }
+
+    @Override
+    public String updatePatient(Patient patient){
+
+//        if (patient.getPatient_name() != null){
+//            patient.setPatient_Name(patient.getPatient_name());
+//        }else {
+//            patient.setPatient_Name(findPatientById(patient.getId()).getPatient_name());
+//        }
+//
+//        if (patient.getGender() != null){
+//            patient.setGender(patient.getGender());
+//        }else {
+//            patient.setGender(findPatientById(patient.getId()).getGender());
+//        }
+//
+//        if (patient.getAddress() != null){
+//            patient.setAddress(patient.getAddress());
+//        }else {
+//            patient.setAddress(findPatientById(patient.getId()).getAddress());
+//        }
+//
+//        if (patient.getBirth_Date() != null){
+//            patient.setBirth_Date(patient.getBirth_Date());
+//        }else {
+//            patient.setBirth_Date(findPatientById(patient.getId()).getBirth_Date());
+//        }
+
+        patientDao.updatePatient(patient);
+
+        return "Data has been updated on id: "+patient.getId();
     }
 
     @Override
