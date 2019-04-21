@@ -34,7 +34,7 @@ public class PatientDaoImpl implements PatientDao {
         criteria.select(patientRoot);
         criteria.orderBy(builder.asc(patientRoot.get("id")));
 
-        //Use criteria to query with session to fetch all contacts
+        //Use criteria to query with session to fetch all patients
         return getSession().createQuery(criteria).getResultList();
     }
 

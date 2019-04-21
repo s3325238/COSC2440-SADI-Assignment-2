@@ -2,6 +2,7 @@ package service;
 
 import dao.PatientDao;
 import model.Patient;
+import model.Prescription;
 import model.Visit;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -34,6 +35,9 @@ public class PatientServiceImpl implements PatientService {
         if (patient.getVisitList() != null){
             for (Visit visit : patient.getVisitList()) {
                 visit.setPatient(patient);
+                for (Prescription prescription: visit.getPrescriptionList()){
+                    prescription.setVisit(visit);
+                }
             }
         }
 

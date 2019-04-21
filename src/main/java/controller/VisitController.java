@@ -40,6 +40,23 @@ public class VisitController {
 
     }
 
+    @RequestMapping(path = "/visits/update/{id}", method = RequestMethod.PUT)
+    public @ResponseBody String updateVisit(@PathVariable("id") int visit_id, @RequestBody Visit visit){
+
+        Visit visit1 = visitService.findVisitById(visit_id);
+
+        if (visit1 != null){
+            visit.setId(visit_id);
+
+            visitService.saveOrUpdateVisit(visit);
+
+            return "Visit data has been updated at id: " + visit.getId();
+        }else {
+            return "No visit has been found with the id: " + visit_id;
+        }
+
+    }
+
     // Find Visit by id
     @RequestMapping(path = "/visits/findVisitById/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
     public @ResponseBody Visit findVisitById (@PathVariable("id") int id){

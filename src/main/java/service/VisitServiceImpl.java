@@ -1,16 +1,13 @@
 package service;
 
 import dao.VisitDao;
+import model.Prescription;
 import model.Visit;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.List;
 
 
@@ -32,6 +29,13 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public void saveOrUpdateVisit(Visit visit) {
+
+        if (visit.getPrescriptionList() != null){
+            for (Prescription prescription : visit.getPrescriptionList()){
+                prescription.setVisit(visit);
+            }
+        }
+
         visitDao.saveOrUpdateVisit(visit);
     }
 

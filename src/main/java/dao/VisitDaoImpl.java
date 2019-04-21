@@ -25,6 +25,8 @@ public class VisitDaoImpl implements VisitDao {
 
     @Override
     public List<Visit> getAllVisits() {
+
+        // Create Criteria Builder
         CriteriaBuilder builder = getSession().getCriteriaBuilder();
 
         //Create Criteria
@@ -33,7 +35,7 @@ public class VisitDaoImpl implements VisitDao {
         criteria.select(visitRoot);
         criteria.orderBy(builder.asc(visitRoot.get("id")));
 
-        //Use criteria to query with session to fetch all contacts
+        //Use criteria to query with session to fetch all visits
         return getSession().createQuery(criteria).getResultList();
 
     }

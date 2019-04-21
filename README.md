@@ -4,15 +4,42 @@ This is a continuity of the previous project HelloHibernateAnnotation. With Hell
 
 SpringMVC is a Spring module that can help us to create MVC web application. It is a good substitution for Struts 1, 2. In addition, SpringMVC supports Restful webservices which is very popular nowsday. 
 
-1. The pom.xml
+**1**. The pom.xml
 The pom.xml is very similar to HelloHibernateAnnotation but we need to add some dependencies related to SpringMVC
 + spring-webmvc: obviously we need this dependency
 + javax.servlet-api: to work with SpringMVC we need a ServletDispatcher. That's why servlet-api is needed
 + jackson-databind: well this is strange but we need jackson to return json in our restful controller
 
-2. Typically, any Java-based web application (servlet=based) needs web.xml file to work. However, with SpringMVC annotation we can REMOVE web.xml and substitute it by extending AbstractAnnotationConfigDispatcherServletInitializer.
+**2**. Patient Controller include 4 functions:
++ Get full patients in the database `(GET method)`: 
+
+    http://localhost:8080/patients
++ Get patient by his/her id `(GET method)`:
+
+    http://localhost:8080/patients/getPatientById/`{id}`
+
+    `param id: patient id in the database you want to get`
 
 
+        
+        
+        {
+        	"patient_name": "New patient with prescription #2 in visit list",
+            "birth_Date": "2019-04-21",
+            "gender": "Male",
+            "address": "702 Nguyen Van Linh",
+            "visitList": [
+                {
+                    "visit_content": "You have successfully add new visit for patient id: 2",
+                    "prescriptionList": [
+                        {
+                            "main_content": "You have successfully add new main content of prescription for visit id 2",
+                            "optional_content": "You have successfully add new optional content of prescription for visit id 2"
+                        }
+                    ]
+                }
+        	]
+        }
         public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
             protected Class<?>[] getRootConfigClasses() {
                 return new Class[]{AppConfig.class};

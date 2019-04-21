@@ -4,6 +4,7 @@ package model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "visit")
@@ -20,6 +21,9 @@ public class Visit {
     @ManyToOne
     @JsonIgnore
     private Patient patient;
+
+    @OneToMany(mappedBy = "visit", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Prescription> prescriptionList;
 
     // One visit can have many drug
 //    @OneToMany(mappedBy = "visit", cascade = CascadeType.ALL, fetch = FetchType.EAGER) //bydefault it is not loaded
@@ -53,5 +57,13 @@ public class Visit {
 
     public void setVisit_content(String visit_content) {
         this.visit_content = visit_content;
+    }
+
+    public List<Prescription> getPrescriptionList() {
+        return prescriptionList;
+    }
+
+    public void setPrescriptionList(List<Prescription> prescriptionList) {
+        this.prescriptionList = prescriptionList;
     }
 }
