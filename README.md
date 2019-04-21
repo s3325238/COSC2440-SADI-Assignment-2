@@ -1,114 +1,110 @@
-# HelloHibernateSpringMVC
+# COSC2440 - Software Architecture: Design & Implementation
 
-This is a continuity of the previous project HelloHibernateAnnotation. With HelloHibernateAnnotation, we can create sessionFactory and studentService to talk to database. In this example, we take it further by integrating the web tier. 
+###### Student name: Nguyen Huu Tri
 
-SpringMVC is a Spring module that can help us to create MVC web application. It is a good substitution for Struts 1, 2. In addition, SpringMVC supports Restful webservices which is very popular nowsday. 
+###### Student id: s3325238
 
-**1**. The pom.xml
-The pom.xml is very similar to HelloHibernateAnnotation but we need to add some dependencies related to SpringMVC
-+ spring-webmvc: obviously we need this dependency
-+ javax.servlet-api: to work with SpringMVC we need a ServletDispatcher. That's why servlet-api is needed
-+ jackson-databind: well this is strange but we need jackson to return json in our restful controller
+## OVERVIEW
 
-**2**. Patient Controller include 4 functions:
-+ Get full patients in the database `(GET method)`: 
+1. In order for this project works perfectly, I recommend that you need to import druglist-csv.csv into that `Drug` database
 
-    http://localhost:8080/patients
-+ Get patient by his/her id `(GET method)`:
+2. I have prepared ICD which contain all the disease code as well as name, however, I have not yet implemented the method.
 
-    http://localhost:8080/patients/getPatientById/{id}
+## Structure
 
-    `param id: patient id in the database you want to get`
+1. There will 5 main packages:
+
+    + `config`: contains database name, url, username, and password
     
-+ Add new patient `(POST method)`:
-
-    http://localhost:8080/patients/add
+    + `controller`: contains 3 controllers
     
-    ```
-    {
+        + `DrugController`, `PatientController`, and `VisitController`
         
-        "patient_name": "New patient with prescription #2 in visit list",
+    + `Dao`: Data Access Object
+    
+        + Fetch data from database
         
-        "birth_Date": "YYYY-MM-DD",
+    + `Model`: creating table relationship and column in the database
+    
+2. Controller will call `Service` package function and within `Service` package, it will call to `DAO` ( Data Access Object )
+
+    + If you want to take a look how add/update work, dive into `Service` package instead of `DAO` package.
+    
+
+## Controller 
+
+1. Patient Controller:
+
+    + Get full patients in the database `(GET method)`: 
+
+        http://localhost:8080/patients
+    + Get patient by his/her id `(GET method)`:
+    
+        http://localhost:8080/patients/getPatientById/{id}
+    
+        `param id: patient id in the database you want to get`
+    + Get patient by his/her name `(GET method)`:
+    
+        http://localhost:8080/patients/getPatientByName/{patient_name}
+    
+        `param patient_name: patient name in the database you want to get`
         
-        "gender": "Male",
+    + Add new patient `(POST method)`:
+    
+        http://localhost:8080/patients/add
         
-        "address": "702 Nguyen Van Linh",
+        POSTMAN body for add new patient
         
-        "visitList": [
+        ```
+        {
             
-            {
-                
-                "visit_content": "You have successfully add new visit for patient id: 2",
-                
-                "prescriptionList": [
-                    
-                    {
-                        
-                        "main_content": "You have successfully add new main content of prescription for visit id 2",
-                        
-                        "optional_content": "You have successfully add new optional content of prescription for visit id 2"
-                    
-                    }
-                    
-                ]
-                
-            }
+            "patient_name": "New patient with prescription #2 in visit list",
             
-        ]
-   
-    }
-    ```
-
-
-In order to wire sessionFactory and studentService beans, we need to inject AppConfig class into the getRootConfigClasses method of AbstractAnnotationConfigServletDispatcherInitializer. 
-
-
-        protected Class<?>[] getRootConfigClasses() {
-                return new Class[]{AppConfig.class};
+            "birth_Date": "YYYY-MM-DD",
+            
+            "gender": "Male",
+            
+            "address": "702 Nguyen Van Linh",
+            
+            "visitList": [
+                
+                {
+                    
+                    "visit_content": "You have successfully add new visit for patient id: 2",
+                    
+                    "prescriptionList": [
+                        
+                        {
+                            
+                            "main_content": "You have successfully add new main content of prescription for visit id 2",
+                            
+                            "optional_content": "You have successfully add new optional content of prescription for visit id 2"
+                        
+                        }
+                        
+                    ]
+                    
+                }
+                
+            ]
+       
         }
+        ```
+
+    + Update existing patient `(PUT method)`:
     
-The AppConfig class is very similar to beans.xm where we define all the beans. Remember to add 4 annotations:
--@Configuration: to denote that this class will contain beans
--@EnableTransationManagement: to denote that we will have transactionManager bean
--@EnableWebMVC: to say that we want to use SpringMVC
--@ComponentScan: to tell SpringMVC where to look for all the controllers
-
-
-
-        @Configuration
-        @EnableTransactionManagement
-        @EnableWebMvc
-        @ComponentScan("controller")
-        public class AppConfig {
-
-            @Bean
-            public StudentService studentService(){
-                return new StudentService();
-            }
-
-            @Bean
-            public LocalSessionFactoryBean sessionFactory(){
-                LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
-
-                sessionFactoryBean.setPackagesToScan("model");
-
-                DriverManagerDataSource dataSource = new DriverManagerDataSource();
-                dataSource.setDriverClassName("org.postgresql.Driver");
-                dataSource.setUrl("jdbc:postgresql://localhost:5432/hello");
-                dataSource.setUsername("postgres");
-                dataSource.setPassword("rmit");
-
-                sessionFactoryBean.setDataSource(dataSource);
-
-                return sessionFactoryBean;
-            }
-
-            @Bean
-            public HibernateTransactionManager transactionManager(SessionFactory sessionFactory){
-                HibernateTransactionManager tx = new HibernateTransactionManager(sessionFactory);
-
-                return tx;
-            }
-
-        }
+        http://localhost:8080/patients/update/{id}
+        
+        `param id: id of the patient in the database you want to update`
+        
+        **LIMITATION:** 
+        
+        + if user leaves out any column below, it will insert null into the database
+        
+            + `patient_name`, `birth_Date`, `gender`, `address`
+    
+    + Delete existing patient `(DELETE method)`:
+        
+        http://localhost:8080/patients/delete/{id}
+        
+        `param id: id of the patient in the database you want to delete`
