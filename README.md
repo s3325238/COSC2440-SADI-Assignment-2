@@ -24,7 +24,7 @@ The pom.xml is very similar to HelloHibernateAnnotation but we need to add some 
 
     http://localhost:8080/patients/add
     
-    {
+    ```{
         
         "patient_name": "New patient with prescription #2 in visit list",
         
@@ -56,7 +56,7 @@ The pom.xml is very similar to HelloHibernateAnnotation but we need to add some 
             
         ]
    
-    }
+    }```
 
 
 In order to wire sessionFactory and studentService beans, we need to inject AppConfig class into the getRootConfigClasses method of AbstractAnnotationConfigServletDispatcherInitializer. 
