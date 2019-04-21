@@ -57,37 +57,21 @@
         
         ```
         {
-            
-            "patient_name": "New patient with prescription #2 in visit list",
-            
+            "patient_name": "New patient with prescription #1 in visit list",   
             "birth_Date": "YYYY-MM-DD",
-            
             "gender": "Male",
-            
             "address": "702 Nguyen Van Linh",
-            
             "visitList": [
-                
                 {
-                    
-                    "visit_content": "You have successfully add new visit for patient id: 2",
-                    
+                    "visit_content": "You have successfully add new visit for patient id: 1",   
                     "prescriptionList": [
-                        
                         {
-                            
-                            "main_content": "You have successfully add new main content of prescription for visit id 2",
-                            
-                            "optional_content": "You have successfully add new optional content of prescription for visit id 2"
-                        
+                            "main_content": "You have successfully add new main content of prescription for visit id 1",   
+                            "optional_content": "You have successfully add new optional content of prescription for visit id 1"
                         }
-                        
                     ]
-                    
                 }
-                
             ]
-       
         }
         ```
 
@@ -108,3 +92,91 @@
         http://localhost:8080/patients/delete/{id}
         
         `param id: id of the patient in the database you want to delete`
+
+2. Drug Controller
+
+    + Get full list of drugs (import csv to database) `(GET method)`:
+    
+        http://localhost:8080/drugs
+        
+    + Get list of drug by the id (`GET method`):
+    
+        http://localhost:8080/drugs/getDrugById/{id}
+        
+        `param id: drug id in the database you want to get`
+        
+    + Get list of drugs by name `(GET method)`:
+        
+        http://localhost:8080/drugs/getDrugByName/{drug_name}
+        
+        `param drug_name: drug name in the database you want to get`
+        
+    + Add new drug `(POST method)`:
+        
+        http://localhost:8080/drugs/add
+        
+        POSTMAN body for add new patient
+            
+        ```
+        {
+            "drug_name": "New name to be inserted into drug table",   
+        }
+        ```
+    + Update existing drug `(PUT method)`:
+    
+        http://localhost:8080/drugs/update/{id}
+        
+        `param id: id of the drug in the database you want to update`
+        
+    + Delete existing patient `(DELETE method)`:
+            
+        http://localhost:8080/drugs/delete/{id}
+        
+        `param id: id of the drug in the database you want to delete`
+        
+3. Visit Controller
+
+    + Get full list of visit (un-regarding the patient) `(GET method)`:
+        
+        http://localhost:8080/visits
+        
+    + Get visit by id `(GET method)`:
+    
+        http://localhost:8080/visits/findVisitById/{id}
+        
+        `param id: visit id in the database you want to get`
+        
+    + Get list of visit by patient id `(GET method)`:
+    
+        http://localhost:8080/visits/findVisitByPatientId/{id}
+        
+        `param id: patient id in the database you want to get`
+        
+        **LIMITATION**
+        
+        + Currently only work if there is patient id has been inserted in visit table
+        
+    + Add new visit by patient id `(POST method)`:
+    
+        http://localhost:8080/visits/addNewVisitByPatientId/{id}
+        
+        `param id: patient id that user want to add new visit`
+        
+        POSTMAN body:
+        
+        ```
+        {
+            "visit_content": "Add new visit with visitController",   
+            "prescriptionList": [
+                {
+                    "main_content": "Add new prescription main content with visitController",   
+                    "optional_content": "Add new prescription optional content with visitController"
+                }
+            ]
+        }
+        ```
+    + Update existing visit based on visit id `(PUT method)`:
+    
+        http://localhost:8080/visits/update/{id}
+        
+        `param id: id of the visit in the database you want to update`
