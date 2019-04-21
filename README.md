@@ -19,40 +19,29 @@ The pom.xml is very similar to HelloHibernateAnnotation but we need to add some 
     http://localhost:8080/patients/getPatientById/{id}
 
     `param id: patient id in the database you want to get`
+    
++ Add new patient `(POST method)`:
 
-
-        
-        
-        {
-        	"patient_name": "New patient with prescription #2 in visit list",
-            "birth_Date": "2019-04-21",
-            "gender": "Male",
-            "address": "702 Nguyen Van Linh",
-            "visitList": [
-                {
-                    "visit_content": "You have successfully add new visit for patient id: 2",
-                    "prescriptionList": [
-                        {
-                            "main_content": "You have successfully add new main content of prescription for visit id 2",
-                            "optional_content": "You have successfully add new optional content of prescription for visit id 2"
-                        }
-                    ]
-                }
-        	]
-        }
-        public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
-            protected Class<?>[] getRootConfigClasses() {
-                return new Class[]{AppConfig.class};
+    http://localhost:8080/patients/add
+    
+    `{
+        "patient_name": "New patient with prescription #2 in visit list",
+        "birth_Date": "YYYY-MM-DD",
+        "gender": "Male",
+        "address": "702 Nguyen Van Linh",
+        "visitList": [
+            {
+                "visit_content": "You have successfully add new visit for patient id: 2",
+                "prescriptionList": [
+                    {
+                        "main_content": "You have successfully add new main content of prescription for visit id 2",
+                        "optional_content": "You have successfully add new optional content of prescription for visit id 2"
+                    }
+                ]
             }
+        ]
+    }`
 
-            protected Class<?>[] getServletConfigClasses() {
-                return null;
-            }
-
-            protected String[] getServletMappings() {
-                return new String[]{"/"};
-            }
-        }
 
 In order to wire sessionFactory and studentService beans, we need to inject AppConfig class into the getRootConfigClasses method of AbstractAnnotationConfigServletDispatcherInitializer. 
 
