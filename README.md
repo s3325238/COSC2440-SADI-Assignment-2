@@ -16,7 +16,7 @@ The pom.xml is very similar to HelloHibernateAnnotation but we need to add some 
     http://localhost:8080/patients
 + Get patient by his/her id `(GET method)`:
 
-    http://localhost:8080/patients/getPatientById/`{id}`
+    http://localhost:8080/patients/getPatientById/{id}
 
     `param id: patient id in the database you want to get`
 
