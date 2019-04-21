@@ -25,21 +25,37 @@ The pom.xml is very similar to HelloHibernateAnnotation but we need to add some 
     http://localhost:8080/patients/add
     
     {
+        
         "patient_name": "New patient with prescription #2 in visit list",
+        
         "birth_Date": "YYYY-MM-DD",
+        
         "gender": "Male",
+        
         "address": "702 Nguyen Van Linh",
+        
         "visitList": [
+            
             {
+                
                 "visit_content": "You have successfully add new visit for patient id: 2",
+                
                 "prescriptionList": [
+                    
                     {
+                        
                         "main_content": "You have successfully add new main content of prescription for visit id 2",
+                        
                         "optional_content": "You have successfully add new optional content of prescription for visit id 2"
-                    }   
-                ]   
-            }   
-        ]   
+                    
+                    }
+                    
+                ]
+                
+            }
+            
+        ]
+   
     }
 
 
