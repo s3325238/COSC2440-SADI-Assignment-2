@@ -11,7 +11,8 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.List;
+
+import java.util.*;
 
 @Repository
 public class VisitDaoImpl implements VisitDao {
@@ -59,5 +60,26 @@ public class VisitDaoImpl implements VisitDao {
         query.setParameter("id", id);
 
         return query.list();
+    }
+
+    @Override
+    public void deleteVisit(int id) {
+
+        Visit visit = getSession().get(Visit.class, id);
+
+        getSession().delete(visit);
+    }
+
+    @Override
+    public void deleteVisitByPatientId(int id){
+
+        List<Visit> visitList = findVisitByPatientId(id);
+
+        Iterator iterator = visitList.iterator();
+        while(iterator.hasNext()) {
+            Visit visit = (Visit) iterator.next();
+            getSession().delete(visit);
+        }
+
     }
 }

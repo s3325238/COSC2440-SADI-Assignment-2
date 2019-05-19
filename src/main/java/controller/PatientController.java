@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import service.PatientService;
 
-
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class PatientController {
 
@@ -17,13 +17,14 @@ public class PatientController {
     PatientService patientService;
 
     // Read all
-    @RequestMapping(path = "/patients", method = RequestMethod.GET, headers = "Accept=application/json")
+//    @CrossOrigin
+    @RequestMapping(path = "/api/patients", method = RequestMethod.GET, headers = "Accept=application/json")
     public List<Patient> getAllPatients() {
         return patientService.getAllPatients();
     }
 
     // Create
-    @RequestMapping(path = "/patients/add", method = RequestMethod.POST)
+    @RequestMapping(path = "/api/patients/add", method = RequestMethod.POST)
     public @ResponseBody Patient addPatient(@RequestBody Patient patient) {
 
         patientService.saveOrUpdatePatient(patient);
@@ -33,7 +34,7 @@ public class PatientController {
     }
 
     // Update
-    @RequestMapping(path = "/patients/update/{id}", method = RequestMethod.PUT)
+    @RequestMapping(path = "/api/patients/update/{id}", method = RequestMethod.PUT)
     public @ResponseBody Patient updatePatient(@PathVariable("id") int id, @RequestBody Patient patient) {
 
         patient.setId(id);
@@ -45,7 +46,7 @@ public class PatientController {
     }
 
     // Delete
-    @RequestMapping(path = "/patients/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/api/patients/delete/{id}", method = RequestMethod.DELETE)
     public @ResponseBody Patient deletePatient(@PathVariable("id") int id) {
 
         Patient patient = patientService.findPatientById(id);
@@ -56,7 +57,8 @@ public class PatientController {
     }
 
     // Get by id
-    @RequestMapping(path = "/patients/getPatientById/{id}", method = RequestMethod.GET)
+//    @CrossOrigin
+    @RequestMapping(path = "/api/patients/getPatientById/{id}", method = RequestMethod.GET)
     public @ResponseBody Patient getPatientById(@PathVariable("id") int id) {
 
         Patient patient = patientService.findPatientById(id);
@@ -71,7 +73,7 @@ public class PatientController {
     }
 
     // Get by name
-    @RequestMapping(path = "/patients/getPatientByName/{patient_name}", method = RequestMethod.GET)
+    @RequestMapping(path = "/api/patients/getPatientByName/{patient_name}", method = RequestMethod.GET)
     public @ResponseBody List<Patient> getPatientByName(@PathVariable("patient_name") String patient_name) {
 
         List<Patient> patient = patientService.findPatientByName(patient_name);

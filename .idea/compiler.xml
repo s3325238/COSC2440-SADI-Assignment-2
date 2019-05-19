@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="cosc2440-final-assignment-2" />
+        <module name="s3325238-cosc2440-assignment-2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
-      <module name="cosc2440-final-assignment-2" target="1.7" />
+      <module name="s3325238-cosc2440-assignment-2" target="1.7" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

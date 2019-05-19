@@ -10,9 +10,11 @@ public interface VisitService {
 
     public void saveOrUpdateVisit(Visit visit);
 
-//    public void deleteVisit(int it);
-
     public Visit findVisitById(int id);
 
     public List<Visit> findVisitByPatientId(int id);
+
+    public void deleteVisit(int id);
+
+    public void deleteVisitByPatientId(int it);
 }

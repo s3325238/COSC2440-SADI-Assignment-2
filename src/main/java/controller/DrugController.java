@@ -7,18 +7,19 @@ import service.DrugService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class DrugController {
 
     @Autowired
     DrugService drugService;
 
-    @RequestMapping(path = "/drugs", method = RequestMethod.GET, headers = "Accept=application/json")
+    @RequestMapping(path = "/api/drugs", method = RequestMethod.GET, headers = "Accept=application/json")
     public List<Drug> getAllDrug() {
         return drugService.getAllDrugs();
     }
 
-    @RequestMapping(path = "/drugs/add", method = RequestMethod.POST)
+    @RequestMapping(path = "/api/drugs/add", method = RequestMethod.POST)
     public @ResponseBody Drug add(@RequestBody Drug drug) {
 
         drugService.saveOrUpdateDrug(drug);
@@ -27,7 +28,7 @@ public class DrugController {
 
     }
 
-    @RequestMapping(path = "/drugs/update/{id}", method = RequestMethod.PUT)
+    @RequestMapping(path = "/api/drugs/update/{id}", method = RequestMethod.PUT)
     public @ResponseBody Drug update(@PathVariable("id") int id, @RequestBody Drug drug) {
 
         drug.setId(id);
@@ -38,7 +39,7 @@ public class DrugController {
 
     }
 
-    @RequestMapping(path = "/drugs/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/api/drugs/delete/{id}", method = RequestMethod.DELETE)
     public @ResponseBody Drug delete(@PathVariable("id") int id) {
 
         Drug drug = drugService.findDrugById(id);
@@ -48,7 +49,7 @@ public class DrugController {
         return drug;
     }
 
-    @RequestMapping(path = "/drugs/getDrugById/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/api/drugs/getDrugById/{id}", method = RequestMethod.GET)
     public @ResponseBody Drug getDrugById(@PathVariable("id") int id) {
 
         Drug drug = drugService.findDrugById(id);
@@ -57,7 +58,7 @@ public class DrugController {
     }
 
     // Need to modify
-    @RequestMapping(path = "/drugs/getDrugByName/{name}", method = RequestMethod.GET)
+    @RequestMapping(path = "/api/drugs/getDrugByName/{name}", method = RequestMethod.GET)
     public @ResponseBody List<Drug> getDrugByName(@PathVariable("name") String drug_name) {
 
         List<Drug> drugs = drugService.findDrugByName(drug_name);

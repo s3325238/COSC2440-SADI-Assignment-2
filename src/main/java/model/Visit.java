@@ -15,10 +15,16 @@ public class Visit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "visit_content")
-    private String visit_content;
+    @Column(name = "visit_reason")
+    private String visit_reason;
 
-    @ManyToOne
+    @Column(name = "main_diagnose")
+    private String main_diagnose;
+
+    @Column(name = "optional_diagnose")
+    private String optional_diagnose;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     private Patient patient;
 
@@ -51,12 +57,28 @@ public class Visit {
         this.patient = patient;
     }
 
-    public String getVisit_content() {
-        return visit_content;
+    public String getVisit_reason() {
+        return visit_reason;
     }
 
-    public void setVisit_content(String visit_content) {
-        this.visit_content = visit_content;
+    public void setVisit_reason(String visit_reason) {
+        this.visit_reason = visit_reason;
+    }
+
+    public String getMain_diagnose() {
+        return main_diagnose;
+    }
+
+    public void setMain_diagnose(String main_diagnose) {
+        this.main_diagnose = main_diagnose;
+    }
+
+    public String getOptional_diagnose() {
+        return optional_diagnose;
+    }
+
+    public void setOptional_diagnose(String optional_diagnose) {
+        this.optional_diagnose = optional_diagnose;
     }
 
     public List<Prescription> getPrescriptionList() {

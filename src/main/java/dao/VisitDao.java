@@ -13,9 +13,11 @@ public interface VisitDao {
 
 //    public void addNewVisitByPatientId(Patient patient);
 
-//    public void deleteVisit(int it);
+    public void deleteVisitByPatientId(int id);
 
     public Visit findVisitById(int id);
+
+    public void deleteVisit(int it);
 
     public List<Visit> findVisitByPatientId(int id);
 }

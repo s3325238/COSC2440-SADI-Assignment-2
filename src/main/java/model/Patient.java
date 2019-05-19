@@ -29,7 +29,15 @@ public class Patient {
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.EAGER) //bydefault it is not loaded
     private List<Visit> visitList;
 
-//    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    public List<Prescription> getPrescriptionList() {
+//        return prescriptionList;
+//    }
+//
+//    public void setPrescriptionList(List<Prescription> prescriptionList) {
+//        this.prescriptionList = prescriptionList;
+//    }
+//
+//    @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    private List<Prescription> prescriptionList;
 
     // One patient takes many drugs in one visit

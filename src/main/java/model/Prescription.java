@@ -20,13 +20,13 @@ public class Prescription {
     @Column(name = "optional_content")
     private String optional_content;
 
-//    @ManyToOne
-//    @JsonIgnore
-//    private Patient patient;
-
     @ManyToOne
     @JsonIgnore
     private Visit visit;
+
+//    @ManyToOne
+//    @JsonIgnore
+//    private Patient patient;
 
 
     // Getter & Setter
@@ -47,6 +47,14 @@ public class Prescription {
     public void setVisit(Visit visit) {
         this.visit = visit;
     }
+
+//    public Patient getPatient() {
+//        return patient;
+//    }
+//
+//    public void setPatient(Patient patient) {
+//        this.patient = patient;
+//    }
 
     public int getId() {
         return id;

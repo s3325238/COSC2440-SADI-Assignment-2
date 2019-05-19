@@ -48,4 +48,16 @@ public class VisitServiceImpl implements VisitService {
     public List<Visit> findVisitByPatientId(int id) {
         return visitDao.findVisitByPatientId(id);
     }
+
+    @Override
+    public void deleteVisit(int id) {
+        visitDao.deleteVisit(id);
+    }
+
+    // Delete by patient id
+    @Override
+    public void deleteVisitByPatientId(int id) {
+
+        visitDao.deleteVisitByPatientId(id);
+    }
 }
